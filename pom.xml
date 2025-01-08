@@ -106,6 +106,14 @@
 			<artifactId>jaxb-api</artifactId>
 			<version>2.3.0</version>
 		</dependency>
+		
+			<!--added by me (Daniela) for code coverage with jacoco -->
+    <dependency>
+        <groupId>org.jacoco</groupId>
+        <artifactId>org.jacoco.agent</artifactId>
+        <version>0.8.10</version>
+        <scope>runtime</scope>
+    </dependency>
 	</dependencies>
 
 	<build>
@@ -127,12 +135,32 @@
 			</plugin>
 			<!-- Spring boot support -->
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
+			  <groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<addResources>false</addResources>
 				</configuration>
 			</plugin>
+			<!--added by me (daniela) to use jacoco report-->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.10</version>
+            <executions>
+                <execution>
+                    <id>report</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>report</goal>
+                    </goals>
+                    <configuration>
+                        <dataFile>${project.build.directory}/jacoco.exec</dataFile>
+                        <outputDirectory>${project.build.directory}/jacoco-site</outputDirectory>
+                    </configuration>
+                </execution>
+            </executions>
+      </plugin>
+      
 		</plugins>
 	</build>
 </project>
